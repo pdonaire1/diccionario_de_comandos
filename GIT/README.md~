@@ -50,71 +50,77 @@ Si ocurre un error al escribir la descripción del commit se puede modificar uti
 git commit --amend
 ```
 --------------------------------------------------------------------------------
-Trabajando sobre el código:
-8. git status
+Trabajando sobre el código
+--------------------------
+```git status```
     Imprime un reporte del estado actual del árbol de trabajo local
-9. git diff [ruta]
+```git diff [ruta]```
     Muestra la diferencia entre los cambios en el árbol de trabajo local
-10. git diff HEAD ruta
+```git diff HEAD ruta```
     Muestra las diferencias entre los cambios registrados y los no registrados
-11. git add path
+```git add path```
     Selecciona el archivo para que sea incluido en el próximo commit
-12. git reset HEAD ruta
+```git reset HEAD ruta```
     Marca el archivo para que no sea incluido en el próximo commit
-13. git commit
+```git commit```
     Realiza el commit de los archivos que han sido registrados (con git-add)
       -a : Automáticamente registra todos los archivos modificados
-14. git reset --soft HEAD^
+```git reset --soft HEAD^```
     Deshace commit & conserva los cambios en el árbol de trabajo local
-15. git reset --hard HEAD^
+```git reset --hard HEAD^```
     Restablece el árbol de trabajo local a la versión del ultimo commit
-16. git clean
+```git clean```
     Elimina archivos desconocidos del árbol de trabajo local
-e) Examinando el histórico:
-17. git log [ruta]
+
+Examinando el histórico:
+
+```git log [ruta]```
     Muestra el log del commit, opcionalmente de la ruta especifica
-18. git log [desde [..hasta]]
+```git log [desde [..hasta]]```
     Muestra el log del commit para un rango de revisiones dado
       --stat : Lista el reporte de diferencias de cada revisión
       -S'pattern' : Busca el historial de cambios que concuerden con el patrón de búsqueda
-19. git blame [archivo]
+```git blame [archivo]```
     Muestra el archivo relacionado con las modificaciones realizadas
-f) Repositorios remotos:
-20. git fetch [remote]
+
+Repositorios remotos:
+```git fetch [remote]```
     Trae los cambios desde un repositorio remoto
-21. git pull [remote]
+```git pull [remote]```
     Descarga y guarda los cambios realizados desde un repositorio remoto
-22. git push [remote]
+```git push [remote]```
     Guarda los cambios en un repositorio remoto
-23. git remote
+```git remote```
     Lista los repositorios remotos
-24. git remote add remote url
+```git remote add remote url```
     Añade un repositorio remoto a la lista de repositorios registrados
-g) Ramas:
-25. git checkout rama
+
+Ramas:
+```git checkout rama```
     Cambia el árbol de trabajo local a la rama indicada
       -b rama : Crea la rama antes de cambiar el árbol de trabajo local a dicha rama
-26. git branch
+```git branch```
     Lista las ramas locales
-27. git branch -f rama rev
+```git branch -f rama rev```
     Sobre-escribe la rama existente y comienza desde la revisión
-28. git merge rama
+```git merge rama```
     Guarda los cambios desde la rama
-h) Exportando e importando:
-29. git apply - < archivo
+Exportando e importando:
+```git apply - < archivo```
     Aplica el parche desde consola (stdin)
-30. git format-patch desde [..hasta]
+```git format-patch desde [..hasta]```
     Formatea un parche con un mensaje de log y un reporte de diferencias (diffstat)
-31. git archive rev > archivo
+```git archive rev > archivo```
     Exporta resumen de la revisión (snapshot) a un archivo
       --prefix=dir/ : Anida todos los archivos del snapshot en el directorio
       --format=[tar|zip] : Especifica el formato de archivo a utilizar: tar or zip
-i) Etiquetas:
-32. git tag name [revision]
+Etiquetas:
+```git tag name [revision]```
     Crea una etiqueta para la revisión referida
       -s : Firma la etiqueta con su llave privada usando GPG
       -l [patrón] : Imprime etiquetas y opcionalmente los registros que concuerden con el patrón de busqueda
-j) Banderas de Estado de los Archivos:
+
+Banderas de Estado de los Archivos:
 M (modified) : El archivo ha sido modificado
 C (copy-edit) : El archivo ha sido copiado y modificado
 R (rename-edit) : El archivo ha sido renombrado y modificado
