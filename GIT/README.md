@@ -77,14 +77,20 @@ git commit
 ```
 Realiza el commit de los archivos que han sido registrados (con git-add)
   -a : Automáticamente registra todos los archivos modificados
+
+```git reset --soft HEAD~1```
+Deshacer el último commit (sin haber hecho push)
+
 ```
 git reset --soft HEAD^
 ```
 Deshace commit & conserva los cambios en el árbol de trabajo local
+
 ```
 git reset --hard HEAD^
 ```
 Restablece el árbol de trabajo local a la versión del ultimo commit
+
 ```
 git clean
 ```
