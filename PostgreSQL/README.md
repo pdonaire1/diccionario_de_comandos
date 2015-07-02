@@ -390,3 +390,6 @@ Clase_Maritima=# SELECT buque, capitan, bandera, loa FROM buque WHERE capitan li
 73. Copiando datos desde un archivo a una tabla
 COPY buque FROM ‘/var/lib/pgsql/Buquedatos.txt';
  
+Fuentes:
+- https://juantrucupei.wordpress.com/2015/03/24/comandos-basicos-de-postgresql/
+- https://caronates.wordpress.com/2010/01/12/comandos-para-postgres/
