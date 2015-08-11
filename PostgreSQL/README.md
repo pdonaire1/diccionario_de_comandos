@@ -3,6 +3,10 @@ Comandos Básicos de PostgreSQL
 
 A continuación un ejemplo de comandos básicos para la administración de PostgreSQL. Siempre estará disponible el aplicativo Pgadmin, para una administración gráfica.
 
+0) Importar sql:
+
+    psql -h hostname -d databasename -U username -f file.sql
+    
 1)El primer comando nos enseñará como iniciar el cliente de psql en nuestra consola:
 
     psql -U user -W -h host database
