@@ -49,6 +49,18 @@ Si ocurre un error al escribir la descripción del commit se puede modificar uti
 ```
 git commit --amend
 ```
+
+Checkear una rama remota
+------------------------
+```
+git checkout -b test origin/test
+```
+
+Eliminar rama local
+-------------------
+```
+git branch -D nombre_rama
+```
 --------------------------------------------------------------------------------
 Trabajando sobre el código
 --------------------------
