@@ -1,5 +1,5 @@
 # Generate models with foreign key
-$ rails generate model photo album:references
+    $ rails generate model photo album:references
 
 This command will generate photos table with integer field album_id and also it will add index for this field automatically. Make sure in it by looking at generated migration:
 
