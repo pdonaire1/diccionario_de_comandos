@@ -61,6 +61,9 @@ Eliminar rama local
 ```
 git branch -D nombre_rama
 ```
+
+#Revertir archivos eliminados
+```git ls-files -d | xargs git checkout --```
 --------------------------------------------------------------------------------
 Trabajando sobre el código
 --------------------------
