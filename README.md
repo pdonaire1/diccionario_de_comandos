@@ -1,5 +1,8 @@
 # diccionario_de_comandos
-Lista de comandos mas utilizados para proyectos.
+
+> Lista de comandos mas utilizados para proyectos.
+> Funciones mas utilizadas.
+> Librerías.
 
 Otros
 =====
