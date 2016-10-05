@@ -5,7 +5,7 @@ Created by **@pdonaire1** October 5, 2016.
 First, import the class and use it, like this:
 ==============================================
 You have to make a file with the Class content in second step.
-Example: create a file ´temporary_token.py´ and import the class in your python file ´from temporary_token import TemporaryToken´
+Example: create a file ```temporary_token.py``` and import the class in your python file ```from temporary_token import TemporaryToken```
 
 ```python
 from .... import TemporaryToken
