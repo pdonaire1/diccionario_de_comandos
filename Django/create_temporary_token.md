@@ -1,14 +1,12 @@
 To create tokens temporary or unlimited by user you can use this class or you can modify it.
 
-Created by 
-#@pdonaire1 
-October 5, 2016
+Created by **@pdonaire1** October 5, 2016.
 
 First, import the class and use it, like this:
 ==============================================
 You have to make a file with the Class content in second step.
 Example: create a file ´temporary_token.py´ and import the class in your python file ´from temporary_token import TemporaryToken´
-
+    ```python
     from .... import TemporaryToken
     from django.contrib.auth.models import User
     user = User.objects.all().last()
@@ -28,11 +26,13 @@ Example: create a file ´temporary_token.py´ and import the class in your pytho
     >> False  # return false because token_encode does not have limit
     temporary_token.hash_get_uid(token_encode)
     >> 3  # user id
-
+    ```
+    
 Second, Temporary Token Class Content
 =============================
 You can create a file ´temporary_token.py´ with this content: 
-
+    
+    ```python
     from django.contrib.auth.tokens import default_token_generator
     from django.utils.encoding import force_bytes
     from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
@@ -122,3 +122,4 @@ You can create a file ´temporary_token.py´ with this content:
             else:
                 limit = dateutil.parser.parse(limit)
             return limit
+    ```
