@@ -22,6 +22,8 @@ Example: create a file ´temporary_token.py´ and import the class in your pytho
     >> datetime.datetime(2016, 10, 5, 21, 10, 6, 732771)
     temporary_token.hash_get_limit(token_encode)
     >> False  # return false because token_encode does not have limit
+    temporary_token.hash_get_uid(token_encode)
+    >> 3  # user id
 
 Second, Temporary Token Class Content
 =============================
