@@ -2,6 +2,8 @@ To create tokens temporary or unlimited by user you can use this class or you ca
 
 First, import the class and use it, like this:
 ==============================================
+You have to make a file with the Class content in second step.
+Example: create a file ´temporary_token.py´ and import the class in your python file ´from temporary_token import TemporaryToken´
 
     from .... import TemporaryToken
     from django.contrib.auth.models import User
@@ -21,8 +23,9 @@ First, import the class and use it, like this:
     temporary_token.hash_get_limit(token_encode)
     >> False  # return false because token_encode does not have limit
 
-Second Temporary Token Class Content
+Second, Temporary Token Class Content
 =============================
+You can create a file ´temporary_token.py´ with this content: 
 
     from django.contrib.auth.tokens import default_token_generator
     from django.utils.encoding import force_bytes
@@ -33,6 +36,10 @@ Second Temporary Token Class Content
     import dateutil.parser
 
     class TemporaryToken:
+        """
+            Class for create limited or unlimited token from an user.
+            created by: @pdonaire1 05-10-2016
+        """
         def __init__(self, user):
             self.user = user
 
@@ -40,7 +47,6 @@ Second Temporary Token Class Content
             """
                 This method allow create a temporary or unlimited token 
                 for users.
-                created by: @pdonaire1 05-10-2016
             """
             uidb64 = urlsafe_base64_encode(force_bytes(self.user.pk))
             token = default_token_generator.make_token(self.user)
@@ -54,7 +60,6 @@ Second Temporary Token Class Content
             """
                 This method allow to check if token is valid either 
                 temporary or unlimited.
-                created by: @pdonaire1 05-10-2016
                 limit => format '%b %d %Y %I:%M%p'
             """
             try:
@@ -97,10 +102,7 @@ Second Temporary Token Class Content
 
         def hash_get_limit(self, token):
             """
-                This function allow to check if token is valid either 
-                temporary or unlimited.
-                created by: @pdonaire1 05-10-2016
-                limit => format '%b %d %Y %I:%M%p'
+                This function allow to check the token limit
             """
             try:
                 token_hash = base64.urlsafe_b64decode(bytes(token))
