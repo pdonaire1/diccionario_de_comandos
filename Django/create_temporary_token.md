@@ -67,7 +67,7 @@ class TemporaryToken:
         """
             This method allow to check if token is valid either 
             temporary or unlimited.
-            limit => format '%b %d %Y %I:%M%p'
+            limit => int(24) for 1 day
         """
         try:
             token_hash = base64.urlsafe_b64decode(bytes(token))
