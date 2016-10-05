@@ -1,4 +1,5 @@
-To create tokens temporary or unlimited by user you can use this class or you can modify it
+To create tokens temporary or unlimited by user you can use this class or you can modify it.
+Created by @pdonaire1 October 5, 2016
 
 First, import the class and use it, like this:
 ==============================================
