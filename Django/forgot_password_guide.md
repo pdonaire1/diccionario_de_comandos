@@ -12,7 +12,7 @@ for make an easier function.
 **from [here:](https://github.com/pdonaire1/diccionario_de_comandos/blob/master/Django/temporary_token.py)**
 from .... import TemporaryToken 
 
-**in our ```views.py```:**
+**in our ```views.py```: **
 
 ```python
 from rest_framework.views import APIView
@@ -47,7 +47,7 @@ class ResetPasswordViewSet(APIView):
             status=status.HTTP_400_BAD_REQUEST)
 ```
 
-** In urls.py:**
+**In urls.py:**
 ```python
 from utils.views import ResetPasswordViewSet
 urlpatterns = [
