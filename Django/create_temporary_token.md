@@ -54,6 +54,7 @@ class TemporaryToken:
         """
             This method allow create a temporary or unlimited token 
             for users.
+            limit => int(24) for 1 day
         """
         uidb64 = urlsafe_base64_encode(force_bytes(self.user.pk))
         token = default_token_generator.make_token(self.user)
@@ -67,7 +68,6 @@ class TemporaryToken:
         """
             This method allow to check if token is valid either 
             temporary or unlimited.
-            limit => int(24) for 1 day
         """
         try:
             token_hash = base64.urlsafe_b64decode(bytes(token))
