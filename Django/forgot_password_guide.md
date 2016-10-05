@@ -12,7 +12,7 @@ for make an easier function.
 **from [here:](https://github.com/pdonaire1/diccionario_de_comandos/blob/master/Django/temporary_token.py)**
 from .... import TemporaryToken 
 
-**in our ```views.py```: **
+**In our ```views.py```: **
 
 ```python
 from rest_framework.views import APIView
@@ -102,6 +102,35 @@ urlpatterns = [
 URL_RECOVER_PASS = 'front/url/forgot-password/'
 ```
 
+Result:
+=======
 
+**In ```/api/forgot-password/```:** 
+
+**Method GET:**
+
+<img src="https://github.com/pdonaire1/diccionario_de_comandos/blob/master/Django/forgot_password/step1.png" 
+width="90%" height="90%" />
+
+**Method GET: params: ```{"username"}```**, 
+Example: ```/api/forgot-password/?username=pablo_donaire29@hotmail.com```
+
+<img src="https://github.com/pdonaire1/diccionario_de_comandos/blob/master/Django/forgot_password/step2.png" 
+width="90%" height="90%" />
+
+**My email:**
+
+<img src="https://github.com/pdonaire1/diccionario_de_comandos/blob/master/Django/forgot_password/step3.png" 
+width="70%" height="70%" />
+
+**Method POST: params: ```{"email_token", "new_password", "username"}```**
+
+<img src="https://github.com/pdonaire1/diccionario_de_comandos/blob/master/Django/forgot_password/step4.png" 
+width="70%" height="70%" />
+
+**And finally our response:**
+
+<img src="https://github.com/pdonaire1/diccionario_de_comandos/blob/master/Django/forgot_password/step5.png" 
+width="70%" height="70%" />
 
 
