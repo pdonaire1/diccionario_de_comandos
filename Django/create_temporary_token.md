@@ -1,3 +1,8 @@
+TemporaryToken by User (customizable):
+======================================
+[Download](https://github.com/pdonaire1/diccionario_de_comandos/blob/master/Django/temporary_token.py) 
+The file ```temporary_token.py``` and right after that follow the steps showed below.
+
 To create tokens temporary or unlimited by user you can use this class or you can modify it.
 
 Created by **@pdonaire1** October 5, 2016.
@@ -28,10 +33,29 @@ temporary_token.hash_get_limit(token_encode)
 temporary_token.hash_get_uid(token_encode)
 >> 3  # user id
 ```
+
+Add extra security: (recommended):
+==================================
+
+If you want to add some extra security you can add an extra token
+**Example:**
+```python
+from .... import TemporaryToken
+from django.contrib.auth.models import User
+user = User.objects.all().first()
+
+temporary_token = TemporaryToken(user)
+token_encode = temporary_token.hash_user_encode(hours_limit=2, extra_token="my-extra-custom-token")
+temporary_token.hash_user_valid(token_encode, extra_token="my-extra-custom-token")
+>> True
+temporary_token.hash_user_valid(token_encode)
+>> False # => If we forgot to add the extra token te response will be False
+```
     
 Second, Temporary Token Class Content
 =============================
-You can create a file ´temporary_token.py´ with this content: 
+You can [download](https://github.com/pdonaire1/diccionario_de_comandos/blob/master/Django/temporary_token.py) 
+the file or create a file ```temporary_token.py``` with the next content: 
     
 ```python
 from django.contrib.auth.tokens import default_token_generator
@@ -49,41 +73,55 @@ class TemporaryToken:
     """
     def __init__(self, user):
         self.user = user
-
-    def hash_user_encode(self, hours_limit=None):
+        
+    def hash_user_encode(self, hours_limit=None, extra_token=''):
         """
             This method allow create a temporary or unlimited token 
             for users.
-            limit => int(24) for 1 day
+            hours_limit => int(24) for 1 day
+            extra_token => a string value for more security
+                This extra token not support the next caracter: "|"
         """
         uidb64 = urlsafe_base64_encode(force_bytes(self.user.pk))
         token = default_token_generator.make_token(self.user)
         date = datetime.datetime.now()
         date_str = date.isoformat()
         until = date + datetime.timedelta(hours=hours_limit) if hours_limit else 'unlimited'
-        token_hash = '%s|%s|%s|%s' % (uidb64, token, date_str, until)
+        token_hash = '%s|%s|%s|%s|%s' % (
+            uidb64, token, date_str, until, extra_token)
         return base64.urlsafe_b64encode(bytes(token_hash))
-
-    def hash_user_valid(self, token):
+        
+    def hash_user_valid(self, token, extra_token=''):
         """
             This method allow to check if token is valid either 
             temporary or unlimited.
         """
+        token_split = token.split("=")
+        # if the token is altered
+        if (token_split[-1:][0] != "" or len(token_split) > 3
+            or token_split[1] != ""): 
+            return False
         try:
             token_hash = base64.urlsafe_b64decode(bytes(token))
         except: return False
-        uidb64, token_decoded, date, limit = token_hash.split('|')
-        valid_uid = int(urlsafe_base64_decode(uidb64)) == self.user.pk
-        valid_token = token_decoded == default_token_generator.make_token(self.user)
+        uidb64, token_decoded, date, limit, token_added = \
+            token_hash.split('|')
+        valid_uid = int(urlsafe_base64_decode(uidb64)) == \
+            self.user.pk
+        valid_token = token_decoded == \
+            default_token_generator.make_token(self.user)
         present = datetime.datetime.now()
         if not self.hash_has_limit(token):
             limit = present + datetime.timedelta(minutes=1)
         else:
             limit = dateutil.parser.parse(limit)
-        if valid_uid and valid_token and (present < limit):
+
+        valid_extra_token = token_added == extra_token
+        if (valid_uid and valid_token and (present < limit)
+            and valid_extra_token):
             return True
         return False
-
+    
     def hash_get_uid(self, token):
         """
             Method that return the user id
@@ -94,6 +132,16 @@ class TemporaryToken:
         uidb64 = token_hash.split('|')[0]
         return int(urlsafe_base64_decode(uidb64))
 
+    def hash_get_extra_token(self, token):
+        """
+            Method that return the user id
+        """
+        try:
+            token_hash = base64.urlsafe_b64decode(bytes(token))
+        except: return False
+        extra_token = token_hash.split('|')[4]
+        return extra_token
+    
     def hash_has_limit(self, token):
         """
             Method which allow know if token si limited
@@ -109,7 +157,10 @@ class TemporaryToken:
 
     def hash_get_limit(self, token):
         """
-            This function allow to check the token limit
+            This function allow to check if token is valid either 
+            temporary or unlimited.
+            created by: @pdonaire1 05-10-2016
+            limit => format '%b %d %Y %I:%M%p'
         """
         try:
             token_hash = base64.urlsafe_b64decode(bytes(token))
