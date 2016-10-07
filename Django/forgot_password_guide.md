@@ -1,7 +1,9 @@
-Forgot password example fullstack:
+Forgot password example FullStack:
 ==================================
 
 A good option for make a complete password reset is folowing this [tutorial](http://ruddra.com/2015/09/18/implementation-of-forgot-reset-password-feature-in-django/).
+
+Or You can user the next tutorial but instead of an external (Font) URL you can create your own Django Form.
 
 Django Rest Service Forgot password:
 ====================================
