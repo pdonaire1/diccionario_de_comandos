@@ -12,7 +12,7 @@ for make an easier function.
 **from [here:](https://github.com/pdonaire1/diccionario_de_comandos/blob/master/Django/temporary_token.py)**
 from .... import TemporaryToken 
 
-**In our ```views.py```: **
+**In our ```views.py```:**
 
 ```python
 """
