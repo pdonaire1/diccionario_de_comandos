@@ -29,10 +29,10 @@ class ResetPasswordViewSet(APIView):
                                         {'email_token': email_token,
                                         'url': settings.URL_RECOVER_PASS})
         try:
-            subject = "Recuperar usuario @ Mall4G"
+            subject = "Recuperar usuario @ MyAPP"
             email_to = user.email
             from_email = settings.DEFAULT_FROM_EMAIL
-            text_plain = "Hola,\n. Ingrese para recuperar su usuario.\nGracias."
+            text_plain = "Hello,\n. Enter to retrieve your user.\Thanks."
             send_mail(subject, text_plain, from_email, [email_to], html_message=template)
         except: pass
 
@@ -73,7 +73,7 @@ class ResetPasswordViewSet(APIView):
                 user.set_password(new_password)
                 user.save()
                 return Response(
-                    [{"message": "password cambiada", "success": True}], 
+                    [{"message": "Password changed", "success": True}], 
                     status=status.HTTP_201_CREATED)
 
         return Response([{"message": "Token or username error", "success": False}],
