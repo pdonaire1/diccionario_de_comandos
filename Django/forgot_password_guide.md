@@ -15,12 +15,18 @@ from .... import TemporaryToken
 **In our ```views.py```: **
 
 ```python
+"""
+    Created by: @pdonaire1 October 06, 2016
+    Ing. Pablo Alejandro González Donaire
+"""
 from rest_framework.views import APIView
+from rest_framework import status
+from django.conf import settings
 from django.contrib.auth.models import User
 from utils.temporary_token import TemporaryToken
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
-from rest_framework.authtoken.models import Token # Optional
+from rest_framework.authtoken.models import Token # Optional if you will use extra_token
 
 class ResetPasswordViewSet(APIView):
     permission_classes = ()
@@ -104,7 +110,7 @@ urlpatterns = [
 ```
 
 **In ```project/settings.py```:**
-```
+```python
 URL_RECOVER_PASS = 'front/url/forgot-password/'
 ```
 
