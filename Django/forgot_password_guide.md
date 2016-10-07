@@ -20,6 +20,7 @@ from django.contrib.auth.models import User
 from utils.temporary_token import TemporaryToken
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
+from rest_framework.authtoken.models import Token # Optional
 
 class ResetPasswordViewSet(APIView):
     permission_classes = ()
@@ -41,11 +42,14 @@ class ResetPasswordViewSet(APIView):
             user = User.objects.get(username=username)
             # Let's send an email to recover password
             temporary_token = TemporaryToken(user)
-            email_token = temporary_token.hash_user_encode(hours_limit=24)
+            token = Token.objects.get_or_create(user=user)  # Optional
+            token = token[0].key  # Optional for extra security
+            email_token = temporary_token.hash_user_encode(
+                hours_limit=24, extra_token=token)
             self.send_forgot_password_email(user, email_token)
             return Response([{
                 "message": "An email has been send to your user",
-                "success": True,
+                "success": True
             }])
         return Response([{
             "POST": "Reset password params: {email_token, new_password, username}",
@@ -63,7 +67,9 @@ class ResetPasswordViewSet(APIView):
         if User.objects.filter(username=username).exists():
             user = User.objects.get(username=username)
             temporary_token = TemporaryToken(user)
-            if temporary_token.hash_user_valid(email_token):
+            # Optional this step is if was created an extra_token:
+            token = Token.objects.get(user=user).key
+            if temporary_token.hash_user_valid(email_token, extra_token=token):
                 user.set_password(new_password)
                 user.save()
                 return Response(
