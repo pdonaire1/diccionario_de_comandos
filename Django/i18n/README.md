@@ -66,6 +66,15 @@ urlpatterns += i18n_patterns( # We add ours URLS with translation
 
 - Generate our locales with ``` python manage.py makemessages -l es ``` and ``` python manage.py makemessages -l en ```
 
+- In ``` django.po ``` 
+
+```
+# Set locales variables in both es and en folder (file: django.po) with
+msgid "Hello World"
+# Message
+msgstr "Hola Mundo ()"
+```
+
 After being created our ``` django.po ```, we need to compile the file with:
 
 ``` python mage.py compilemessages -l es ``` and ``` python mage.py compilemessages -l en ```
