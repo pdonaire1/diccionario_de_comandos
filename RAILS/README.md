@@ -75,3 +75,20 @@ end
 ```
 And we have builded our many to many relation.
 
+# A good explaination about lambda and Procs
+Next explain some cases about 
+[lambda and procs objects](http://augustl.com/blog/2008/procs_blocks_and_anonymous_functions/)
+
+```
+say_hello = Proc.new { puts "Hello!" }
+say_hello.call
+# => "Hello!"
+
+
+a_lambda = lambda {|a| a.inspect }
+puts a_lambda.call
+# => nil
+puts a_lambda.call("foo", 5)
+# => ["foo", 5]
+```
+
