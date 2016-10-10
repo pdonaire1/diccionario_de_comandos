@@ -92,3 +92,8 @@ puts a_lambda.call("foo", 5)
 # => ["foo", 5]
 ```
 
+# Runnig tasks or workers:
+[Here](https://github.com/resque/resque-scheduler) is a good tutorial of how to make rails workers. 
+Run with the command: ``` rake environment resque:scheduler ```.
+
+[Another option](https://github.com/resque/resque) is it.
