@@ -32,10 +32,13 @@ from rest_framework.authtoken.models import Token # Optional if you will use ext
 
 class ResetPasswordViewSet(APIView):
     permission_classes = ()
+    
     def send_forgot_password_email(self, user, email_token):
         template = render_to_string('./email/forgot_password.html',
-                                        {'email_token': email_token,
-                                        'url': settings.URL_RECOVER_PASS})
+            {
+                'email_token': email_token,
+                'username': user.username,
+                'url': settings.URL_RECOVER_PASS})
         try:
             subject = "Recuperar usuario @ MyAPP"
             email_to = user.email
@@ -104,7 +107,8 @@ urlpatterns = [
 <html>
     <body>
         For recover password enter to next 
-        <a href="{{url}}?email_token={{email_token}}" style="text-decoration: none; color: #1e88e5;">
+        <a href="{{ url }}?email_token={{ email_token }}&username={{ username }}" 
+          style="text-decoration: none; color: #1e88e5;">
           link (recover user).
         </a>
     </body>
