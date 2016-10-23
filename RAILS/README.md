@@ -99,6 +99,8 @@ Run with the command: ``` rake environment resque:scheduler ```.
 [Another option](https://github.com/resque/resque) is it.
 
 # Tests
-1. Shoulda Matchers: https://github.com/thoughtbot/shoulda-matchers
+1. [Shoulda Matchers](https://github.com/thoughtbot/shoulda-matchers)
+2. [Factories](https://github.com/thoughtbot/factory_girl/blob/master/GETTING_STARTED.md)
+3. [Faker for Factories](https://github.com/stympy/faker)
 
 
