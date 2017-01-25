@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link href="calendar.css" rel="stylesheet">
+    <script src="moment.min.js"></script>
+    <script src="calendar.js"></script> 
+  </head>
+  <body style="background: #729a91;">
+			<center>
+			  <h1>Calendar</h1>
+    		  <h1>CSS Calendar</h1>
+			  <div style="width: 80%;">
+			    <div id="calendar"></div>
+			  </div>
+			  <h1>listo</h1>
+			  <p> Calendar with css, js, momento</p>
+			  
+			</center>
+            
+    <script>
+      var data = getEventService();
+      var calendar = new Calendar('#calendar', data);
+      buildEvents();
+      
+      
+      function buildEvents(){
+        calendar.element.addEventListener('buildEvents', function () {
+          setTimeout(function(){ 
+            /* despues de construir el calendar por primera vez
+              obtenemos el current month para volver a dibujar el 
+              calendario con los eventos obtenidos por service
+            */
+            console.log("mes: ", calendar.current.format('MMMM YYYY'));
+            console.log("mes: ", calendar.current.format('MM'));
+            calendar.events = getEventService();
+            calendar.draw();
+          },100);
+        }, false); 
+      }
+      
+      function getEventService(){
+        /* hacer servicio para los eventos del anterior mes, de este mes y del siguiente
+         * los meses: 1=> Enero, 2=> Febrero, 3=> Marzo,....
+         */
+        data = [
+          { eventName: 'Game vs Houston', calendar: 'Sports', color: 'orange', day: 4, month: 1},
+          { eventName: 'Game vs Denver', calendar: 'Sports', color: 'blue', day: 4, month: 1},
+          { eventName: 'Game vs San Degio', calendar: 'Sports', color: 'blue', day: 4, month: 1},
+          { eventName: 'Game vs Portalnd', calendar: 'Sports', color: 'blue', day: 7, month: 1},
+          { eventName: 'Pick up from Soccer Practice', calendar: 'Kids', color: 'yellow', day: 11, month: 1},
+          { eventName: 'School Play', calendar: 'Kids', color: 'yellow', day: 29, month: 1},
+          { eventName: 'Parent/Teacher Conference', calendar: 'Kids', color: 'yellow', day: 31, month: 1},
+          { eventName: 'Lunch Meeting w/ Mark...', calendar: 'Work', color: 'orange', day: 31, month: 1},
+
+          { eventName: 'Interview - Jr. Web Developer', calendar: 'Work', color: 'orange', day: 2, month: 2},
+          { eventName: 'Demo New App to the Board', calendar: 'Work', color: 'orange', day: 3, month: 2},
+          { eventName: 'Dinner w/ Marketing', calendar: 'Work', color: 'blue', day: 4, month: 2},
+
+          { eventName: 'Ice Cream Night', calendar: 'Kids', color: 'yellow', day: 30, month: 3},
+          { eventName: 'Free Tamale Night', calendar: 'Other', color: 'green', day: 30, month: 3},
+          { eventName: 'Bowling Team, Bowling Team, Bowling Team, Bowling Team', calendar: 'Other', color: 'green', day: 30, month: 3},
+          { eventName: 'Teach Kids to Code', calendar: 'Other', color: 'green', day: 30, month: 3},
+          { eventName: 'Startup Weekend', calendar: 'Other', color: 'green', day: 30, month: 3},
+        ];
+        return data;
+      }
+    </script>
+  <body>
+</html>
