@@ -1,7 +1,9 @@
-Forgot password example fullstack:
+Forgot password example FullStack:
 ==================================
 
 A good option for make a complete password reset is folowing this [tutorial](http://ruddra.com/2015/09/18/implementation-of-forgot-reset-password-feature-in-django/).
+
+Or You can user the next tutorial but instead of an external (Font) URL you can create your own Django Form.
 
 Django Rest Service Forgot password:
 ====================================
@@ -12,22 +14,31 @@ for make an easier function.
 **from [here:](https://github.com/pdonaire1/diccionario_de_comandos/blob/master/Django/temporary_token.py)**
 from .... import TemporaryToken 
 
-**In our ```views.py```: **
+**In our ```views.py```:**
 
 ```python
+"""
+    Created by: @pdonaire1 October 06, 2016
+    Ing. Pablo Alejandro González Donaire
+"""
 from rest_framework.views import APIView
+from rest_framework import status
+from django.conf import settings
 from django.contrib.auth.models import User
 from utils.temporary_token import TemporaryToken
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
-from rest_framework.authtoken.models import Token # Optional
+from rest_framework.authtoken.models import Token # Optional if you will use extra_token
 
 class ResetPasswordViewSet(APIView):
     permission_classes = ()
+    
     def send_forgot_password_email(self, user, email_token):
         template = render_to_string('./email/forgot_password.html',
-                                        {'email_token': email_token,
-                                        'url': settings.URL_RECOVER_PASS})
+            {
+                'email_token': email_token,
+                'username': user.username,
+                'url': settings.URL_RECOVER_PASS})
         try:
             subject = "Recuperar usuario @ MyAPP"
             email_to = user.email
@@ -96,7 +107,8 @@ urlpatterns = [
 <html>
     <body>
         For recover password enter to next 
-        <a href="{{url}}?email_token={{email_token}}" style="text-decoration: none; color: #1e88e5;">
+        <a href="{{ url }}?email_token={{ email_token }}&username={{ username }}" 
+          style="text-decoration: none; color: #1e88e5;">
           link (recover user).
         </a>
     </body>
@@ -104,7 +116,7 @@ urlpatterns = [
 ```
 
 **In ```project/settings.py```:**
-```
+```python
 URL_RECOVER_PASS = 'front/url/forgot-password/'
 ```
 

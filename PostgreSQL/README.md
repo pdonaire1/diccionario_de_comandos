@@ -1,5 +1,12 @@
 Comandos Básicos de PostgreSQL
 
+Creando usuario:
+
+    $ su - postgres 
+    $ psql template1
+    template1=# CREATE USER tester WITH PASSWORD 'test_password';
+    template1=# GRANT ALL PRIVILEGES ON DATABASE "test_database" to tester;
+    template1=# \q
 
 A continuación un ejemplo de comandos básicos para la administración de PostgreSQL. Siempre estará disponible el aplicativo Pgadmin, para una administración gráfica.
 
