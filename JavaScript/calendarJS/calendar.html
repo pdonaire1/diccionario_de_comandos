@@ -21,7 +21,11 @@
       var data = getEventService();
       var calendar = new Calendar('#calendar', data);
       buildEvents();
-      
+      calendar.element.addEventListener('addEventButton', function () {
+        var button = document.getElementsByClassName('calendar-btn-add')[0];
+        console.log("date: ", button.value);
+        addEventService(button.value);
+      });
       
       function buildEvents(){
         calendar.element.addEventListener('buildEvents', function () {
@@ -64,6 +68,7 @@
         ];
         return data;
       }
+      function addEventService(){}
     </script>
   <body>
 </html>

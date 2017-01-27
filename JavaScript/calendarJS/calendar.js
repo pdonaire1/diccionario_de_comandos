@@ -16,6 +16,7 @@
       }, 500);
     }
     this.buildEvents = new Event('buildEvents');
+    this.addEventButton = new Event('addEventButton');
     this.element = document.getElementById(selector.replace('#', ''));
   }
 
@@ -206,6 +207,7 @@
   }
 
   Calendar.prototype.openDay = function(el) {
+    var self = this;
     var details, arrow;
     var dayNumber = +el.querySelectorAll('.day-number')[0].innerText || +el.querySelectorAll('.day-number')[0].textContent;
     var day = this.current.clone().date(dayNumber);
@@ -247,6 +249,19 @@
       el.parentNode.appendChild(details);
     }
 
+    var old_button = document.getElementsByClassName('calendar-btn-add')[0];
+    if (old_button){
+      old_button.remove();
+    }
+    var button = createElement('button', 'calendar-btn-add', 'Add Event');
+    var date = el.getElementsByClassName("day-number")[0]
+    var number = this.current.format("YYYY-MM-") + date.textContent
+    button.setAttribute("value", number);
+    button.onclick = function(){
+      self.element.dispatchEvent(self.addEventButton);
+    }
+    details.appendChild(button);
+
     var todaysEvents = this.events.reduce(function(memo, ev) {
       // if(ev.date.isSame(day, 'day')) {  // if is the same month and day
       if( parseInt(day.format('DD'))===ev.day && ev.month == day.month() + 1) {
@@ -266,8 +281,9 @@
     //Remove any events in the current details element
     var currentWrapper = ele.querySelector('.events');
     var wrapper = createElement('div', 'events in' + (currentWrapper ? ' new' : ''));
-
+    
     events.forEach(function(ev) {
+
       var div = createElement('div', 'event');
       var square = createElement('div', 'event-category ' + ev.color);
       var span = createElement('span', '', ev.eventName);

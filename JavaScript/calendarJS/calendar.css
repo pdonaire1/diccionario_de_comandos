@@ -291,11 +291,20 @@ body {
   top: 12px;
   left: 14px;
 }
+.calendar-btn-add {
+    background: #4a4a4a;
+    border-radius: 4px;
+    border: 1px solid #000;
+    color: #FFF;
+    font-weight: bold;
+    margin-top: 1%;
+}
 
 .entry.blue:after { background: rgba(156, 202, 235, 1); }
 .entry.orange:after { background: rgba(247, 167, 0, 1); }
 .entry.green:after { background: rgba(153, 198, 109, 1); }
 .entry.yellow:after { background: rgba(249, 233, 0, 1); }
+
 
 /* Responsive */
 @media screen and (max-width: 440px) {
