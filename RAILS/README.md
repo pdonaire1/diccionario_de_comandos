@@ -102,5 +102,7 @@ Run with the command: ``` rake environment resque:scheduler ```.
 1. [Shoulda Matchers](https://github.com/thoughtbot/shoulda-matchers)
 2. [Factories](https://github.com/thoughtbot/factory_girl/blob/master/GETTING_STARTED.md)
 3. [Faker for Factories](https://github.com/stympy/faker)
+4. [Controller Examples to test](http://codecrate.com/2014/11/rspec-controllers-best-practices.html)
+5. [Controller's specs](https://everydayrails.com/2012/04/07/testing-series-rspec-controllers.html)
 
 
