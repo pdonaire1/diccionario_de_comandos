@@ -105,4 +105,21 @@ Run with the command: ``` rake environment resque:scheduler ```.
 4. [Controller Examples to test](http://codecrate.com/2014/11/rspec-controllers-best-practices.html)
 5. [Controller's specs](https://everydayrails.com/2012/04/07/testing-series-rspec-controllers.html)
 
+## Example of controller test:
+If i have a method called create, but in routes is called in diferent form, I need to call to the method with the create If I am in controller spec, but if I am in request spec, I need to call the method with the name of the route.
 
+```
+...
+    before :each do
+      controller.stub(:authenticate_user!).and_return(true)
+      controller.stub(:check_permissions).and_return(true)
+      controller.stub(:current_user).and_return(operator)
+    end
+    it "should return 200 and the auth token" do
+      operator.confirm!
+      operator.stub(:ensure_authentication_token!).and_return("token")
+      post :create, {'email'=>operator.email, 'password'=>'123456'}, format: :json
+      json_body = JSON.parse(response.body)
+      json_body['token'].should == @operator.authentication_token
+    end
+```
