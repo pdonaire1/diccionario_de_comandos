@@ -1,6 +1,7 @@
 """
     Created by: @pdonaire1 October 06, 2016
     Ing. Pablo Alejandro González Donaire
+    depends of python-dateutil
 """
 from django.contrib.auth.tokens import default_token_generator
 from django.utils.encoding import force_bytes
