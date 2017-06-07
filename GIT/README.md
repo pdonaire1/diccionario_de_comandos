@@ -62,6 +62,17 @@ Eliminar rama local
 git branch -D nombre_rama
 ```
 
+Deshacer un commit
+------------------
+``` git reset --hard HEAD^1 ```
+
+Deshacer un commit recien hecho en rama remota
+----------------------------------------------
+Esto aplica cuando nadie haya hecho push
+```
+git reset --hard HEAD^ 
+git push -f ```
+
 #Revertir archivos eliminados
 ```git ls-files -d | xargs git checkout --```
 --------------------------------------------------------------------------------
