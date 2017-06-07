@@ -71,7 +71,8 @@ Deshacer un commit recien hecho en rama remota
 Esto aplica cuando nadie haya hecho push
 ```
 git reset --hard HEAD^ 
-git push -f ```
+git push -f 
+```
 
 #Revertir archivos eliminados
 ```git ls-files -d | xargs git checkout --```
