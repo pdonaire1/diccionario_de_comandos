@@ -11,6 +11,11 @@ Django Rest Service Forgot password:
 We can use this [tutorial](https://github.com/pdonaire1/diccionario_de_comandos/blob/master/Django/create_temporary_token.md)
 for make an easier function.
 
+**Install requirements**
+```
+pip install python-dateutil
+```
+
 **from [here:](https://github.com/pdonaire1/diccionario_de_comandos/blob/master/Django/temporary_token.py)**
 from .... import TemporaryToken 
 
